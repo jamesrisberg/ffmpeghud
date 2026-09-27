@@ -1,0 +1,19 @@
+{
+  "id": "xyz.machud.ffmpeghud",
+  "name": "ffmpegHUD",
+  "socket": "ffmpeghud",
+  "panels": [
+    {
+      "id": "tools",
+      "title": "ffmpeg",
+      "symbol": "film.stack",
+      "kind": "hover",
+      "defaultSize": [640, 500],
+      "compactSize": [44, 44],
+      "capabilities": ["acceptsFileDrop"],
+      "verbs": ["show", "hide", "toggle", "frame", "mode", "drop", "run", "jobs", "cancel", "presets"],
+      "settingsSchema": "settings.json",
+      "order": 3
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "version": 1,
+  "settings": [
+    {
+      "key": "output.folder",
+      "title": "Save results to",
+      "type": "enum",
+      "group": "Output",
+      "options": [
+        {"value": "same", "title": "The same folder as the original"},
+        {"value": "movies", "title": "~/Movies"},
+        {"value": "custom", "title": "A folder of my choosing"}
+      ],
+      "default": "same"
+    },
+    {
+      "key": "output.customFolder",
+      "title": "Custom folder",
+      "type": "path",
+      "group": "Output",
+      "default": "",
+      "help": "Used when Save results to is set to a folder of your choosing."
+    },
+    {
+      "key": "naming.suffix",
+      "title": "Name suffix",
+      "type": "string",
+      "group": "Output",
+      "default": "_{preset}",
+      "help": "Added to the original's name; {preset} is the preset's word (gif, compressed, trimmed...). Existing files are never overwritten: a -2, -3... is added instead."
+    },
+    {
+      "key": "keepOriginal",
+      "title": "Keep the original",
+      "type": "bool",
+      "group": "Output",
+      "default": true,
+      "help": "Off: the original is moved to the Trash after a job succeeds."
+    },
+    {
+      "key": "jobs.concurrent",
+      "title": "Jobs at once",
+      "type": "int",
+      "group": "Jobs",
+      "default": 2,
+      "help": "How many ffmpeg jobs run at the same time (1-8); the rest wait in line."
+    }
+  ]
+}
