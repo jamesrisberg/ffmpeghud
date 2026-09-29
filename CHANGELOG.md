@@ -6,6 +6,12 @@ All notable changes to ffmpegHUD are documented here. The format follows
 
 ## [Unreleased]
 
+## [0.2.0] - 2026-09-29
+
+### Changed
+- Built with HUDKit 0.2.0: `hello` reports contract version 0.2.0, and a socket request's
+  `args` values that are JSON objects or arrays reach the app as JSON text.
+
 ## [0.1.0] - 2026-09-27
 
 ### Added
