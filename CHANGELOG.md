@@ -6,6 +6,8 @@ All notable changes to ffmpegHUD are documented here. The format follows
 
 ## [Unreleased]
 
+## [0.3.0] - 2026-10-02
+
 ### Fixed
 - `--snapshot` draws the panel only: it no longer starts the control socket under the app's default name (which clashed with the running app), registers the hotkey or adds a second menu bar icon.
 
