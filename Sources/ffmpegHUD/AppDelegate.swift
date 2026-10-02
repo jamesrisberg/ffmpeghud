@@ -14,22 +14,26 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         HUDEditMenu.install(appName: "ffmpegHUD")
         model = AppModel(settingsURL: AppEnvironment.settingsURL)
         panel = PanelController(model: model)
-        control = ControlHost(model: model, panel: panel)
-        control.start()
-        setupStatusItem()
-        // While MacHUD runs, its menu hosts this one and the icon hides (HUDKit menu bar consolidation).
-        control.router.menuProvider = { [weak self] in self?.statusItem?.menu }
-        // menuBar.consumed is kept in <home>/menubar.json, so FFMPEGHUD_HOME isolates it too.
-        HUDStatusItemPolicy.attach(statusItem, appID: control.manifest.id, store: .home(AppEnvironment.baseDirectory))
-        if AppEnvironment.hotKeysEnabled {
-            if HUDHotKeyCenter.shared.register(Self.toggleHotKey, onPress: { [weak self] in self?.panel.toggle() }) == nil {
-                model.show("⌃⌥F is taken by another app; use the menu bar icon", error: true)
-            }
-        }
-
         let args = CommandLine.arguments
         func value(_ flag: String) -> String? {
             args.firstIndex(of: flag).flatMap { args.indices.contains($0 + 1) ? args[$0 + 1] : nil }
+        }
+        // A `--snapshot` run only draws: no control socket (a running app owns that name), no
+        // announcement, no hotkey, no menu bar item.
+        let snapshotting = value("--snapshot") != nil
+        control = ControlHost(model: model, panel: panel)
+        if !snapshotting {
+            control.start()
+            setupStatusItem()
+            // While MacHUD runs, its menu hosts this one and the icon hides (HUDKit menu bar consolidation).
+            control.router.menuProvider = { [weak self] in self?.statusItem?.menu }
+            // menuBar.consumed is kept in <home>/menubar.json, so FFMPEGHUD_HOME isolates it too.
+            HUDStatusItemPolicy.attach(statusItem, appID: control.manifest.id, store: .home(AppEnvironment.baseDirectory))
+            if AppEnvironment.hotKeysEnabled {
+                if HUDHotKeyCenter.shared.register(Self.toggleHotKey, onPress: { [weak self] in self?.panel.toggle() }) == nil {
+                    model.show("⌃⌥F is taken by another app; use the menu bar icon", error: true)
+                }
+            }
         }
         // `--preset <id>`: start on that preset. `--drop <path>`: start with that file dropped.
         // `--run`: run the preset on it. All three are for --snapshot and demos.
@@ -55,7 +59,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     func applicationWillTerminate(_ notification: Notification) {
         // Never leave ffmpeg running behind us, nor half-written files.
         model.queue.shutdown()
-        control.stop()
+        control?.stop()
     }
 
     func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool {

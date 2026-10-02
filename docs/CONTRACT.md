@@ -123,7 +123,7 @@ FFMPEGHUD_SOCKET=ffmpeghud-test build/ffmpegHUD.app/Contents/Helpers/ffmpeghud q
 
 | Flag | Effect |
 |---|---|
-| `--snapshot <path.png>` | writes a PNG of the panel after it settles (the glass drawn as a dark stand-in); the app keeps running |
+| `--snapshot <path.png>` | writes a PNG of the panel after it settles (the glass drawn as a dark stand-in); the app keeps running; serves no control socket, announces nothing, registers no hotkey and adds no menu bar item, so it never touches a running instance |
 | `--snapshot-mode compact` | pictures the compact tile instead |
 | `--snapshot-delay <s>` | waits `s` seconds before the snapshot (default 2) |
 | `--drop <path>` | starts with that file dropped |
