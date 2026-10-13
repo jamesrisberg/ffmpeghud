@@ -6,6 +6,16 @@ All notable changes to ffmpegHUD are documented here. The format follows
 
 ## [Unreleased]
 
+## [0.3.1] - 2026-10-13
+
+### Changed
+- The panel's frosted backdrop is now the Mac's own blur of what is behind it under a light
+  tint, the same as the rest of the MacHUD family.
+
+### Fixed
+- The panel is already frosted when a desktop switch lands, instead of showing opaque for a
+  moment first.
+
 ## [0.3.0] - 2026-10-02
 
 ### Fixed
