@@ -6,6 +6,11 @@ All notable changes to ffmpegHUD are documented here. The format follows
 
 ## [Unreleased]
 
+## [0.3.4] - 2026-11-14
+
+### Changed
+- Updated shared window handling with HUDKit 0.5.3.
+
 ## [0.3.3] - 2026-11-14
 
 ### Fixed
